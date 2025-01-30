@@ -106,7 +106,16 @@ for i = 0, 10, 1 do     ..... syntax for for loop
     print(i)
 end
 ]]
--- local arr = {2, 3, 45, 523, 34321, 1212, 1}
--- for i = 1, #arr do
---     print(arr[i])
--- end
+
+local i = 10
+
+while i > 0 do
+    print(i .. " > 0")
+    i = i - 1
+end
+
+local x = 1
+repeat
+    print("Hey There!")
+    x = x + 1
+until x > 10
