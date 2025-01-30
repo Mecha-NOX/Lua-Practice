@@ -102,20 +102,33 @@ print(old)
 ]]
 
 --[[
-for i = 0, 10, 1 do     ..... syntax for for loop
+for i = 0, 10, 1 do     ..... syntax for For loop
     print(i)
 end
 ]]
 
+--[[
 local i = 10
 
-while i > 0 do
+while i > 0 do                  ..... syntax for while loop
     print(i .. " > 0")
     i = i - 1
 end
 
 local x = 1
-repeat
+repeat                          ..... syntax for Repeat loop (its like do-while loop)
     print("Hey There!")
     x = x + 1
-until x > 10
+until x > 10 
+]]
+
+--[[
+local ans = io.read()                         ..... syntax for taking user input
+print(ans)
+]]
+
+--[[
+io.write("Input 10 + 5: ")                         ..... syntax for taking user input in the same line
+local ans = io.read()
+print("\nYour Answer: " .. ans)
+]]
