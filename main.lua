@@ -106,7 +106,7 @@ for i = 0, 10, 1 do     ..... syntax for for loop
     print(i)
 end
 ]]
-local arr = {2, 3, 45, 523, 34321, 1212, 1}
-for i = 1, #arr do
-    print(arr[i])
-end
+-- local arr = {2, 3, 45, 523, 34321, 1212, 1}
+-- for i = 1, #arr do
+--     print(arr[i])
+-- end
