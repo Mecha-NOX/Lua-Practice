@@ -155,24 +155,51 @@ for i =1, #arr do
 end
 ]]
 
-local function displayAge(age)
-    if type(age) ~= "number" then
-        print("Invalid Input")
-        return
-    end
-    if age > 1 then
-        print("You are " .. age .. " years old")
-        print("You were " .. age -1 .. " years old last year")
-    elseif age == 1 then
-        print("You are " .. age .. " year old")
-        print("You were born last year")
-    else
-        print("Invalid Age")
-        return
-    end
-    print("You will be " .. age + 2 .. " years old in 2 years")
-    age = nil
+--[[
+local add10 = function(number)
+    local outcome = 10 + number
+    return number, outcome                  .... syntax for returning 2 values
 end
-local input1 = io.read()
-displayAge(tonumber(input1))
-input1 = nil
+local _, output = add10(20)                  .... syntax for telling, that we dont strictly need the 1st value
+print("Had 10 added to it: " .. output)
+]]
+
+--[[
+local function counter(number, end_num)
+    local count = number + 1
+
+    if(count < end_num) then
+        print(count)
+        return counter(count, end_num)                  .... example of Recursive Function
+    end
+
+    return count
+end
+
+print(counter(10, 15))
+]]
+
+--[[
+local function counter()
+    local count = 0
+
+    return function()           .... example of anonymous Function and Closures/Lexical Scoping
+        count = count + 1
+        return count
+    end
+end
+
+local x = counter()
+]]
+--[[
+local function sum(...)                     ..... function can take n number of inputs
+    local sums = 0
+     for _, value in pairs({...}) do        .... using pairs will keep the key and its associated value
+        sums = sums + value
+     end                                    ..... syntax for when you dont know the amount of inputs of a function
+    return sums
+end
+
+print(sum(10, 5))
+print(sum(20, 30, 70))
+]]
