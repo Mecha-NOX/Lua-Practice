@@ -203,3 +203,71 @@ end
 print(sum(10, 5))
 print(sum(20, 30, 70))
 ]]
+
+--[[
+local routine_1 = coroutine.create(
+    function ()
+        for i = 1, 10, 1 do
+            print("(Routine 1): " .. i)
+
+            if i == 5 then
+                coroutine.yield()
+            end
+        end
+    end
+)
+
+local routine_func = function()                 ---- working with coroutines
+    for i = 11, 20 do
+        print("(Routine 2): " .. i)
+    end
+end
+
+local routine_2 = coroutine.create(routine_func)
+
+coroutine.resume(routine_1) -- suspended
+coroutine.resume(routine_2)
+--coroutine.resume(routine_1) -- dead
+
+if coroutine.status(routine_1) == "suspended" then
+    coroutine.resume(routine_1)
+end
+print("Routine-1 Status: " .. coroutine.status(routine_1))
+print("Routine-2 Status: " .. coroutine.status(routine_2))
+]]
+
+--[[
+-- io.output("myFile.txt")                                              ---- opens a file of that name if doesn't exist, creates one
+-- io.write("Hello World!" .. " This file is created with Lua!")        ---- writes in a file
+-- io.close()                                                           ---- closes the file
+]]
+
+--[[
+io.input("myFile.txt")                                                  ---- opens a file of the name
+local file = io.read()                                                  ---- reads the file
+io.close()                                                              ---- closes the file
+print(file)
+]]
+
+--[[
+local file = io.open("myFile.txt", "w")             .... another way to open a file in write mode
+for i = 1, 10, 1 do
+    file:write("Number: " .. i .. "\n")
+end
+file.close()
+]]
+
+--[[
+local file = io.open("myFile.txt", "a")             .... another way to open a file in append mode
+for i = 11, 30, 1 do
+    file:write("Number: " .. i .. "\n")
+end
+file.close()
+]]
+
+--[[
+local file = io.open("myFile.txt", "r")             ..... anothe way to open a file in read mode
+local reads = file:read("*all")
+file:close()
+print(reads)
+]]
