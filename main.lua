@@ -91,7 +91,7 @@ print(old)
     <
     >=
     <=
-    -= is != or NotEqualTo
+    ~= is != or NotEqualTo
     ==
 ]]
 
@@ -132,3 +132,47 @@ io.write("Input 10 + 5: ")                         ..... syntax for taking user 
 local ans = io.read()
 print("\nYour Answer: " .. ans)
 ]]
+
+--[[
+local arr = {10, true, "Hello world!", 2.4567}
+table.insert(arr, 2, "lol")                         ..... syntax for inserting an index in the table
+table.remove(arr, 3)                         ..... syntax for removing an index in the table
+for i = 1, #arr do
+    print("Value at Index (" .. i .. ") is (" .. tostring(arr[i]) .. ") of type: (" .. type(arr[i]) .. ")")
+end
+]]
+
+--[[
+local arr = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+}
+for i =1, #arr do
+    for j = 1, #arr[i] do           .... syntax for accessing 2-d array
+        print(arr[i][j])
+    end
+end
+]]
+
+local function displayAge(age)
+    if type(age) ~= "number" then
+        print("Invalid Input")
+        return
+    end
+    if age > 1 then
+        print("You are " .. age .. " years old")
+        print("You were " .. age -1 .. " years old last year")
+    elseif age == 1 then
+        print("You are " .. age .. " year old")
+        print("You were born last year")
+    else
+        print("Invalid Age")
+        return
+    end
+    print("You will be " .. age + 2 .. " years old in 2 years")
+    age = nil
+end
+local input1 = io.read()
+displayAge(tonumber(input1))
+input1 = nil
