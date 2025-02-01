@@ -266,7 +266,7 @@ file.close()
 ]]
 
 --[[
-local file = io.open("myFile.txt", "r")             ..... anothe way to open a file in read mode
+local file = io.open("myFile.txt", "r")             ..... another way to open a file in read mode
 local reads = file:read("*all")
 file:close()
 print(reads)
