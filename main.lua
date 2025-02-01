@@ -91,7 +91,7 @@ print(old)
     <
     >=
     <=
-    -= is != or NotEqualTo
+    ~= is != or NotEqualTo
     ==
 ]]
 
@@ -131,4 +131,143 @@ print(ans)
 io.write("Input 10 + 5: ")                         ..... syntax for taking user input in the same line
 local ans = io.read()
 print("\nYour Answer: " .. ans)
+]]
+
+--[[
+local arr = {10, true, "Hello world!", 2.4567}
+table.insert(arr, 2, "lol")                         ..... syntax for inserting an index in the table
+table.remove(arr, 3)                         ..... syntax for removing an index in the table
+for i = 1, #arr do
+    print("Value at Index (" .. i .. ") is (" .. tostring(arr[i]) .. ") of type: (" .. type(arr[i]) .. ")")
+end
+]]
+
+--[[
+local arr = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+}
+for i =1, #arr do
+    for j = 1, #arr[i] do           .... syntax for accessing 2-d array
+        print(arr[i][j])
+    end
+end
+]]
+
+--[[
+local add10 = function(number)
+    local outcome = 10 + number
+    return number, outcome                  .... syntax for returning 2 values
+end
+local _, output = add10(20)                  .... syntax for telling, that we dont strictly need the 1st value
+print("Had 10 added to it: " .. output)
+]]
+
+--[[
+local function counter(number, end_num)
+    local count = number + 1
+
+    if(count < end_num) then
+        print(count)
+        return counter(count, end_num)                  .... example of Recursive Function
+    end
+
+    return count
+end
+
+print(counter(10, 15))
+]]
+
+--[[
+local function counter()
+    local count = 0
+
+    return function()           .... example of anonymous Function and Closures/Lexical Scoping
+        count = count + 1
+        return count
+    end
+end
+
+local x = counter()
+]]
+--[[
+local function sum(...)                     ..... function can take n number of inputs
+    local sums = 0
+     for _, value in pairs({...}) do        .... using pairs will keep the key and its associated value
+        sums = sums + value
+     end                                    ..... syntax for when you dont know the amount of inputs of a function
+    return sums
+end
+
+print(sum(10, 5))
+print(sum(20, 30, 70))
+]]
+
+--[[
+local routine_1 = coroutine.create(
+    function ()
+        for i = 1, 10, 1 do
+            print("(Routine 1): " .. i)
+
+            if i == 5 then
+                coroutine.yield()
+            end
+        end
+    end
+)
+
+local routine_func = function()                 ---- working with coroutines
+    for i = 11, 20 do
+        print("(Routine 2): " .. i)
+    end
+end
+
+local routine_2 = coroutine.create(routine_func)
+
+coroutine.resume(routine_1) -- suspended
+coroutine.resume(routine_2)
+--coroutine.resume(routine_1) -- dead
+
+if coroutine.status(routine_1) == "suspended" then
+    coroutine.resume(routine_1)
+end
+print("Routine-1 Status: " .. coroutine.status(routine_1))
+print("Routine-2 Status: " .. coroutine.status(routine_2))
+]]
+
+--[[
+-- io.output("myFile.txt")                                              ---- opens a file of that name if doesn't exist, creates one
+-- io.write("Hello World!" .. " This file is created with Lua!")        ---- writes in a file
+-- io.close()                                                           ---- closes the file
+]]
+
+--[[
+io.input("myFile.txt")                                                  ---- opens a file of the name
+local file = io.read()                                                  ---- reads the file
+io.close()                                                              ---- closes the file
+print(file)
+]]
+
+--[[
+local file = io.open("myFile.txt", "w")             .... another way to open a file in write mode
+for i = 1, 10, 1 do
+    file:write("Number: " .. i .. "\n")
+end
+file.close()
+]]
+
+--[[
+local file = io.open("myFile.txt", "a")             .... another way to open a file in append mode
+for i = 11, 30, 1 do
+    file:write("Number: " .. i .. "\n")
+end
+file.close()
+]]
+
+--[[
+local file = io.open("myFile.txt", "r")             ..... another way to open a file in read mode
+local reads = file:read("*all")
+file:close()
+print(reads)
 ]]
