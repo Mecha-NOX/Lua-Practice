@@ -38,6 +38,7 @@
 -- / is divide by / quotient
 -- % is modulas / remainder
 -- * is multiply / product
+-- ^ is power
 -- math.pi = 3.14....
 -- math.random() gives random value
 
@@ -271,3 +272,115 @@ local reads = file:read("*all")
 file:close()
 print(reads)
 ]]
+
+--[[
+local past = os.time({
+    year = 2000,
+    month = 10,
+    day = 1,
+    hour = 13,
+    min = 20,
+    sec = 10
+})
+
+print(os.time() - past) 
+same as print
+(os.difftime(os.time(), past))          .... gives time since the Unix Epoch till the date and time inputted, in seconds
+]]
+
+-- print(os.getenv("USERNAME"))            ..... prints environment variable name
+-- os.rename("CurrentName.Extension", "NewName.Extension")          .... changes the current name and extension to new name and extension
+-- os.remove("filename.extension")              .... deletes the file of name
+-- os.execute("git status")                        .... executes the command in the terminal
+
+--[[
+local start = os.clock()
+for i = 1, 1000000000 do
+    local x = 10                            
+end
+print(os.clock() - start)                       .... gives time taken to execute this command
+]]
+
+--[[
+for i = 1, 10 do
+    print(i)
+    if i == 5 then
+        os.exit()                           .... terminates the program
+    end
+end
+]]
+
+--[[
+local mod = require("mymath")               .... loads the given module
+print(mod.add(5, 10))
+print(mod.power(2, 4))
+]]
+
+--[[                                        .... example of OOPs in Lua
+local function Pet(name)
+    name = name or "Luis"
+    return {
+        name = name,
+        status = "Hungry",
+
+        feed = function(self)
+            print(name .. " is fed")
+            self.status = "Full"
+        end
+    }
+end
+
+local function Dog(name, breed)
+    local dog = Pet(name)
+
+    dog.breed = breed
+    dog.loyalty = 0
+
+    dog.isLoyal = function(self)
+        return self.loyalty >= 10
+    end
+
+    dog.feed = function(self)
+        print(name .. " is fed")
+        self.status = "Full"
+        self.loyalty = self.loyalty + 5
+    end
+
+    dog.bark = function(self)
+        print("Woof Woof!")
+    end
+
+    return dog
+end
+
+local lassy = Dog("Lassy", "Poodle")
+lassy:feed()
+lassy:feed()
+if lassy:isLoyal() then
+    print("Will Protect against intruders")
+else
+    print("Will not Protect against intruders")
+end
+
+print(lassy.breed)
+lassy:bark()
+]]
+
+local function addTableValues(x, y)
+    return x.num + y.num
+end
+
+local metatable = {
+    __add = addTableValues,
+    __sub = function(x, y)
+        return x.num - y.num
+    end
+}
+
+local tbl1 = {num = 50}
+local tbl2 = {num = 10}
+
+setmetatable(tbl1, metatable)
+
+local ans = tbl1 - tbl2
+print(ans)
